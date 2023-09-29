@@ -38,6 +38,9 @@ const validationSchema = Yup.object({
     confirmPassword: Yup.string()
         .oneOf([Yup.ref("password"), null], "Passwords must match")
         .required("Please confirm your password"),
+    termsAndConditions: Yup.boolean()
+        .oneOf([true], "You must accept the Terms and Conditions"),
+
 });
 
 export const SignUp = () => {
@@ -71,7 +74,7 @@ export const SignUp = () => {
         }, 1500)
     };
     /* Check box*/
-    const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+    const label = { inputProps: { 'aria-label': 'Terms and conditions' } };
 
 
     return (
@@ -84,11 +87,11 @@ export const SignUp = () => {
                 }}
                 className="bg_img"
             >
-                <Typography component="h1" variant="h5" sx={{color:"blue"}}>
+                <Typography component="h1" variant="h5" sx={{ color: "blue" }}>
                     Sign in
                 </Typography>
                 <Formik
-                    initialValues={{ email: "", password: "", confirmPassword: "" }}
+                    initialValues={{ email: "", password: "", confirmPassword: "", name: "", termsAndConditions: "" }}
                     validationSchema={validationSchema}
                     onSubmit={handleSubmit}
                 >
@@ -103,7 +106,7 @@ export const SignUp = () => {
                                 name="name" // Change to lowercase "name"
                                 type="text" // Change to lowercase "text"
                                 label="Full Name"
-                                inputProps={{ maxLength: 25 }}
+                                inputProps={{ maxLength: 20 }}
                             />
                             <ErrorMessage name="name" sx={{ ml: 7 }}>
                                 {(msg) => (
@@ -122,7 +125,7 @@ export const SignUp = () => {
                                 name="email"
                                 type="email"
                                 label="Email"
-                                inputProps={{ maxLength: 25 }}
+                                inputProps={{ maxLength: 20 }}
                             />
 
                             <ErrorMessage name="email" sx={{ ml: 7 }}>
@@ -157,6 +160,7 @@ export const SignUp = () => {
                                                 </InputAdornment>
                                             }
                                             label="Password"
+                                            inputProps={{ maxLength: 13 }}
                                         />
                                     </FormControl>
                                 )}
@@ -189,14 +193,22 @@ export const SignUp = () => {
                                     </FormHelperText>
                                 )}
                             </ErrorMessage>
-                            <Stack flexDirection="row" sx={{ ml: 8 }}>
-                                <Checkbox {...label} /> <Typography variant="body2" class="checkbox-style">"Terms and Conditions"</Typography>
-
+                            <Stack direction='row' sx={{ml:8 ,mt:2}}>
+                                <Field type="checkbox" name="termsAndConditions"/>
+                                <label htmlFor="termsAndConditions" className="terms_text" >I accept the Terms and Conditions</label>
                             </Stack>
+                                <ErrorMessage name="termsAndConditions">
+                                    {(msg) => (
+                                        <FormHelperText sx={{ ml: 8 }} error>
+                                            {msg}
+                                        </FormHelperText>
+                                    )}
+                                </ErrorMessage>
+
 
                             <Button
                                 type="submit"
-                                sx={{ width: 190, mt: 3, ml: 15 }}
+                                sx={{ width: 100, mt: 3, ml: 20 }}
                                 variant="contained"
                                 disabled={isSubmitting}
                             >
