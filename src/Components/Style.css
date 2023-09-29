@@ -1,0 +1,24 @@
+.bg_img {
+    background-color: rgb(253, 253, 255);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px 2px rgb(104, 104, 104);
+}
+
+.checkbox-style {
+    margin-top: 15px;
+    color: rgb(18, 70, 214);
+    text-decoration: underline;
+}
+
+/*home page css*/
+
+.home_text {
+    font-weight: bold !important;
+    background-image: linear-gradient(to right, #f32170, #ff6b08,
+            #cf23cf, #eedd44);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
